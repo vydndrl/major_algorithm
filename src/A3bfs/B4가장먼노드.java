@@ -26,6 +26,7 @@ public class B4가장먼노드 {
         System.out.println("answer = " + answer);
 
     }
+
     static int bfs(int start, int end){
         Queue<Integer> queue = new LinkedList<>();
         queue.add(start);
