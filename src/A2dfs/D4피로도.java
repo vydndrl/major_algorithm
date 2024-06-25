@@ -21,15 +21,15 @@ public class D4피로도 {
         return answer;
     }
 
-    public static void dfs(int start, int k, int[][] dungeons) {
+    public static void dfs(int count, int k, int[][] dungeons) {
         for (int i = 0; i < dungeons.length; i++) {
             if (!visited[i] && dungeons[i][0] <= k) {
                 visited[i] = true;
-                dfs(start + 1, k - dungeons[i][1], dungeons);
+                dfs(count + 1, k - dungeons[i][1], dungeons);
                 visited[i] = false;
             }
         }
-        answer = Math.max(answer, start);
+        answer = Math.max(answer, count);
     }
 }
 
