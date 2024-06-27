@@ -13,19 +13,29 @@ public class D5등굣길 {
     }
 
     private static int solution(int m, int n, int[][] puddles) {
-        int[][] maps = new int[n][m];
+        int[][] street = new int[n][m];
 
-        for (int i = 0; i < maps.length; i++) {
-            for (int j = 0; j < maps[i].length; j++) {
-                maps[i][j] = 1;
-                if (i == puddles[0][0] && j == puddles[0][1]) {
-                    maps[i -1][j- 1] = -1;
-                }
-            }
+        for (int[] puddle : puddles) {
+            street[puddle[1] - 1][puddle[0] - 1] = -1;
         }
 
+        street[0][0] = 1;
 
-        System.out.println("maps = " + Arrays.deepToString(maps));
-        return 1;
+        for (int i = 0; i < n; i++) { // 시작점은 1로 저장
+            for (int j = 0; j < m; j++) {
+
+                if(street[i][j] == -1) { // 웅덩이면 0으로 바꾸고 continue
+                    street[i][j] = 0;
+                    continue;
+                }
+
+                if(i != 0)
+                    street[i][j] += street[i - 1][j] % 1000000007; // 숫자가 이 값을 초과할 수 있기 때문에 계산 과정에서 나머지 구하기
+
+                if(j != 0)
+                    street[i][j] += street[i][j - 1] % 1000000007; // 왼쪽
+            }
+        }
+        return street[n - 1][m - 1] % 1000000007;
     }
 }
